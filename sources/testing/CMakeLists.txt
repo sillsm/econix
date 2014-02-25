@@ -45,11 +45,6 @@ endif()
 
 SET(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 
-# Add test executable target
-#add_executable(MainTest ${PROJECT_SOURCE_DIR}/src/main.cpp)
-
-# Create dependency of MainTest on googletest
-#add_dependencies(MainTest googletest)
 
 # Specify MainTest's link libraries
 
@@ -60,7 +55,7 @@ if (Econix_build_cpp_tests)
     enable_testing()
 	include_directories(${GTEST_INCLUDE_DIR})
     add_executable(CppTesting ${cpp_testing_SOURCES} )
-	add_dependencies(CppTesting googletest)
+    add_dependencies(CppTesting googletest)
 
 ExternalProject_Get_Property(googletest binary_dir)
 if(MSVC)
@@ -71,8 +66,8 @@ else()
 endif()
 target_link_libraries(
     CppTesting
-    debug ../${binary_dir}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    optimized ../${binary_dir}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
+    debug ${binary_dir}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
+    optimized ${binary_dir}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
     ${Pthread})
 
 endif()
