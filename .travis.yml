@@ -10,6 +10,7 @@ before_script:
   - mkdir build
   - cd build
   - cmake ..
+  - pwd
 
 script: "make && pwd && sh ./.travis_build.sh && cd ../../test/ && sh ./.travis_build.sh"
 
