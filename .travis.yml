@@ -12,7 +12,7 @@ before_script:
   - cmake ..
   - pwd
 
-script: "make && pwd && sh ../sources/testing/travis_build.sh"
+script: "make && pwd && sh ../sources/testing/.travis_build.sh"
 
 notifications:
   email:
