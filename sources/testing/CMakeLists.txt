@@ -6,6 +6,9 @@ include_directories("/usr/local/include")
 link_directories("/usr/local/lib")
 set(cpp_testing_SOURCES
     main.cpp
+	SimpleResourceTransactionTest.h
+	SimpleResourceTransactionTest.cpp
+	TestBase.h
 	)
 	
 ########################### GTEST
@@ -32,7 +35,8 @@ ExternalProject_Add(
     # Wrap download, configure and build steps in a script to log output
     LOG_DOWNLOAD ON
     LOG_CONFIGURE ON
-    LOG_BUILD ON)
+    LOG_BUILD ON
+	)
 	
  # Specify include dir
 ExternalProject_Get_Property(googletest source_dir)
@@ -63,7 +67,7 @@ if(MSVC)
   target_link_libraries(
     CppTesting
     debug ${binary_dir}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    optimized ${binary_dir}/RecleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
+    optimized ${binary_dir}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
     ${Pthread})
 else()
   set(Suffix ".a")
