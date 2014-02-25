@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 TEST(MathTest, TwoPlusTwoEqualsFour) {
-EXPECT_EQ(2 + 2, 4);
+EXPECT_EQ(2 + 2, 5);
 }
 int main(int argc, char **argv) {
 ::testing::InitGoogleTest( &argc, argv );
