@@ -60,14 +60,20 @@ if (Econix_build_cpp_tests)
 ExternalProject_Get_Property(googletest binary_dir)
 if(MSVC)
   set(Suffix ".lib")
-else()
-  set(Suffix ".a")
-  set(Pthread "-pthread")
-endif()
-target_link_libraries(
+  target_link_libraries(
     CppTesting
     debug ${binary_dir}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
     optimized ${binary_dir}/RecleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
     ${Pthread})
+else()
+  set(Suffix ".a")
+  set(Pthread "-pthread")
+  target_link_libraries(
+    CppTesting
+    debug ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
+    optimized ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
+    ${Pthread})
+endif()
+
 
 endif()
