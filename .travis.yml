@@ -11,7 +11,7 @@ before_script:
   - cd build
   - cmake ..
 
-script: make
+script: "make && pwd && sh ./.travis_build.sh && cd ../../test/ && sh ./.travis_build.sh"
 
 notifications:
   email:
