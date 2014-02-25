@@ -72,7 +72,7 @@ endif()
 target_link_libraries(
     CppTesting
     debug ${binary_dir}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    optimized ${binary_dir}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
+    optimized ${binary_dir}/Release/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
     ${Pthread})
 
 endif()
