@@ -15,4 +15,6 @@ set( EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR} )
 
 
 add_subdirectory( "sources/executable" )
+add_subdirectory( "sources/utility" )
 add_subdirectory( "sources/testing" )
+
