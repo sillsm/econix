@@ -1,4 +1,6 @@
 ## CMakeLists.txt
+include_directories(..)
+
 option(Econix_build_cpp_tests "Build all of foo's c++ unit tests." ON)
 project(EconixCPlusPlusTesting)
 cmake_minimum_required(VERSION 2.8)
@@ -62,6 +64,7 @@ if (Econix_build_cpp_tests)
     add_dependencies(CppTesting googletest)
 
 ExternalProject_Get_Property(googletest binary_dir)
+include_directories(${PCL_INCLUDE_DIRS})
 target_link_libraries(CppTesting utility)
 
 if(MSVC)

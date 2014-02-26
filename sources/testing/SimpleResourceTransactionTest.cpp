@@ -1,5 +1,5 @@
 #include "SimpleResourceTransactionTest.h"
-#include "../utility/transactionblob.h"
+#include "utility/transactionblob.h"
 
 TEST(SimpleResourceTransactionTest, FirstTest) {
  //Add two new accounts
