@@ -62,10 +62,13 @@ if (Econix_build_cpp_tests)
     add_dependencies(CppTesting googletest)
 
 ExternalProject_Get_Property(googletest binary_dir)
+target_link_libraries(CppTesting utility)
+
 if(MSVC)
   set(Suffix ".lib")
   target_link_libraries(
     CppTesting
+	utility
     debug ${binary_dir}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
     optimized ${binary_dir}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
     ${Pthread})

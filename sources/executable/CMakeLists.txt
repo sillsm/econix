@@ -13,4 +13,3 @@ set( EXEC_SRCS
 add_executable( execproj ${EXEC_SRCS} )
 target_link_libraries( execproj)
 
-install(TARGETS execproj RUNTIME DESTINATION bin)

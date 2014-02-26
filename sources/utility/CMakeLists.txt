@@ -8,5 +8,8 @@ include_directories( "." )
 
 set( UTILITY_SRCS
      transactionblob.h
+	 transactionblob.cpp
    )
 
+add_library(utility ${UTILITY_SRCS})
+target_link_libraries(utility)
