@@ -4,4 +4,3 @@ econix
 
 RESTful economy/transaction/contracts simulator for games
 
-[![Simple Transaction](https://github.com/sillsm/econix/blob/master/research/Simple%20Transaction.svg)]
