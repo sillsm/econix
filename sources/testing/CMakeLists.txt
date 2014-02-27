@@ -41,11 +41,11 @@ if (Econix_build_cpp_tests)
 	  message(${GTEST_INCLUDE_DIR})
 	endif()	
 	
-	include_directories(${GTEST_INCLUDE_DIR})
+	include_directories(${GTEST_INCLUDE_DIRS})
     add_executable(CppTesting ${cpp_testing_SOURCES} )
     add_dependencies(CppTesting GTest)    
 	
-	target_link_libraries(CppTesting utility ${Pthread} ${GTEST_LIBRARY} )
+	target_link_libraries(CppTesting utility ${Pthread} ${GTEST_LIBRARIES} )
 
 
 endif()
