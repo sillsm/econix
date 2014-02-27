@@ -13,7 +13,7 @@ before_script:
   - cmake ..
   - pwd
 
-script: "make && pwd && ./CppTesting -v"
+script: "make --debug=v && pwd && ./CppTesting -v"
 
 notifications:
   email:
