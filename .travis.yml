@@ -15,7 +15,7 @@ before_install:
   # copy or symlink libgtest.a and libgtest_main.a to your /usr/lib folder
   - sudo cp *.a /usr/lib
   # get yourself back to the right dir
-  - cd /home/travis/build/sillsm/econix/build
+  - cd /home/travis/build/sillsm/econix
 
 before_script:
   - mkdir build
