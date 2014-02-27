@@ -37,7 +37,11 @@ if (Econix_build_cpp_tests)
 	  set(GTEST_LIBRARY_BIG "default value" CACHE FILEPATH "description")
 	  
 	  set (GTEST_INCLUDE_DIR ${GTEST_INCLUDE})
+	  set (GTEST_INCLUDE_DIRS ${GTEST_INCLUDE_DIR})
+	  
 	  set(GTEST_LIBRARY ${GTEST_LIBRARY_BIG} )
+	  set(GTEST_LIBRARIES ${GTEST_LIBRARIES} )
+	  
 	  message(${GTEST_INCLUDE_DIR})
 	endif()	
 	
@@ -45,7 +49,11 @@ if (Econix_build_cpp_tests)
     add_executable(CppTesting ${cpp_testing_SOURCES} )
     add_dependencies(CppTesting GTest)    
 	
-	target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} pthread)
+	if (NOT Gtest_FOUND)
+	  target_link_libraries(CppTesting utility ${GTEST_LIBRARY_BIG} ${Pthread})
+	else()
+	  target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} pthread)
+	endif()
 
 
 endif()
