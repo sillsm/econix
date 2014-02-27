@@ -6,6 +6,16 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq cmake 
   - sudo apt-get install libgtest-dev
+  - sudo apt-get install cmake # install cmake
+  - pwd
+  - cd /usr/src/gtest
+  - sudo cmake CMakeLists.txt
+  - sudo make
+ 
+  # copy or symlink libgtest.a and libgtest_main.a to your /usr/lib folder
+  - sudo cp *.a /usr/lib
+  # get yourself back to the right dir
+  - cd /home/travis/build/sillsm/econix/build
 
 before_script:
   - mkdir build

@@ -45,9 +45,7 @@ if (Econix_build_cpp_tests)
     add_executable(CppTesting ${cpp_testing_SOURCES} )
     add_dependencies(CppTesting GTest)    
 	
-	if (NOT Gtest_FOUND)
-      target_link_libraries(CppTesting utility ${Pthread} ${GTEST_LIBRARY} )
-	else()
-	  target_link_libraries(CppTesting utility gtest )
-    endif()
+	target_link_libraries(CppTesting utility ${Pthread} ${GTEST_LIBRARY} )
+
+
 endif()
