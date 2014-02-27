@@ -11,6 +11,7 @@ before_script:
   - cd build
   - cmake ..
   - pwd
+  - sudo apt-get install libgtest-dev
 
 script: "make && pwd && ./CppTesting -v"
 

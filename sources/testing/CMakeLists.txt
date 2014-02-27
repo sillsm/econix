@@ -14,40 +14,6 @@ set(cpp_testing_SOURCES
 	)
 	
 ########################### GTEST
-# Enable ExternalProject CMake module
-INCLUDE(ExternalProject)
- 
-# Set default ExternalProject root directory
-SET_DIRECTORY_PROPERTIES(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/third_party)
- 
-# Add gtest
-# http://stackoverflow.com/questions/9689183/cmake-googletest
-ExternalProject_Add(
-    googletest
-    URL http://googletest.googlecode.com/files/gtest-1.6.0.zip
-
-    # TIMEOUT 10
-    # # Force separate output paths for debug and release builds to allow easy
-    # # identification of correct lib in subsequent TARGET_LINK_LIBRARIES commands
-     CMAKE_ARGS -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG:PATH=DebugLibs
-                -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE:PATH=ReleaseLibs
-                -Dgtest_force_shared_crt=ON
-    # Disable install step
-    INSTALL_COMMAND ""
-    # Wrap download, configure and build steps in a script to log output
-    LOG_DOWNLOAD ON
-    LOG_CONFIGURE ON
-    LOG_BUILD ON
-	)
-	
- # Specify include dir
-ExternalProject_Get_Property(googletest source_dir)
-include_directories(${source_dir}/include)
-
-# Add compiler flag for MSVC 2012
-if(MSVC_VERSION EQUAL 1700)
-  add_definitions(-D_VARIADIC_MAX=10)
-endif()
 
 SET(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 
@@ -58,32 +24,26 @@ SET(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 #END add gtest
 
 if (Econix_build_cpp_tests)
+    Message(${CMAKE_SOURCE_DIR}/Libraries/bin/src/googletest/include/gtest/)
+	#export CMAKE_INCLUDE_PATH="$CMAKE_SOURCE_DIR/Libraries/bin/src/googletest/include:$CMAKE_INCLUDE_PATH"
+	#export CMAKE_INCLUDE_PATH="/stuff/lib.boost.1.52/include:$CMAKE_INCLUDE_PATH"
+	
     enable_testing()
+	
+	find_package(GTest QUIET)
+	if (NOT Gtest_FOUND)
+	  message("could not find it")
+      set(GTEST_INCLUDE "default value" CACHE FILEPATH "description")
+	  set(GTEST_LIBRARY_BIG "default value" CACHE FILEPATH "description")
+	  
+	  set (GTEST_INCLUDE_DIR ${GTEST_INCLUDE})
+	  set(GTEST_LIBRARY ${GTEST_LIBRARY_BIG} )
+	  message(${GTEST_INCLUDE_DIR})
+	endif()	
+	
 	include_directories(${GTEST_INCLUDE_DIR})
     add_executable(CppTesting ${cpp_testing_SOURCES} )
-    add_dependencies(CppTesting googletest)
-
-ExternalProject_Get_Property(googletest binary_dir)
-include_directories(${PCL_INCLUDE_DIRS})
-target_link_libraries(CppTesting utility)
-
-if(MSVC)
-  set(Suffix ".lib")
-  target_link_libraries(
-    CppTesting
-	utility
-    debug ${binary_dir}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    optimized ${binary_dir}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    ${Pthread})
-else()
-  set(Suffix ".a")
-  set(Pthread "-pthread")
-  target_link_libraries(
-    CppTesting
-    debug ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    optimized ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    ${Pthread})
-endif()
-
+    add_dependencies(CppTesting GTest)    
+    target_link_libraries(CppTesting utility ${Pthread} ${GTEST_LIBRARY} )
 
 endif()
