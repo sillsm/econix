@@ -5,13 +5,13 @@ compiler: gcc
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq cmake 
+  - sudo apt-get install libgtest-dev
 
 before_script:
   - mkdir build
   - cd build
   - cmake ..
   - pwd
-  - sudo apt-get install libgtest-dev
 
 script: "make && pwd && ./CppTesting -v"
 
