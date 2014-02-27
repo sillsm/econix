@@ -45,7 +45,7 @@ if (Econix_build_cpp_tests)
     add_executable(CppTesting ${cpp_testing_SOURCES} )
     add_dependencies(CppTesting GTest)    
 	
-	target_link_libraries(CppTesting utility ${Pthread} ${GTEST_LIBRARIES} )
+	target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} pthread)
 
 
 endif()
