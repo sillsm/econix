@@ -40,7 +40,6 @@ if (Econix_build_cpp_tests)
 	  set (GTEST_INCLUDE_DIRS ${GTEST_INCLUDE_DIR})
 	  
 	  set(GTEST_LIBRARY ${GTEST_LIBRARY_BIG} )
-	  set(GTEST_LIBRARIES ${GTEST_LIBRARIES} )
 	  
 	  message(${GTEST_INCLUDE_DIR})
 	endif()	
