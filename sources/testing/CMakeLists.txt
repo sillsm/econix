@@ -36,9 +36,7 @@ if (Econix_build_cpp_tests)
       set(GTEST_INCLUDE "default value" CACHE FILEPATH "description")
 	  set(GTEST_LIBRARY_BIG "default value" CACHE FILEPATH "description")
 	  
-	  set (GTEST_INCLUDE_DIR ${GTEST_INCLUDE})
-	  set (GTEST_INCLUDE_DIRS ${GTEST_INCLUDE_DIR})
-	  
+	  set (GTEST_INCLUDE_DIR ${GTEST_INCLUDE})	  
 	  set(GTEST_LIBRARY ${GTEST_LIBRARY_BIG} )
 	  
 	  message(${GTEST_INCLUDE_DIR})
