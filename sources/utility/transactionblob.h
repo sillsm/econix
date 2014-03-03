@@ -4,13 +4,20 @@
 #include <memory>
 #include <iostream>
 #include <string>
+
+#include <openssl/blowfish.h>
+#include <openssl/sha.h>
+#include <openssl\hmac.h>
 /*
 /  Blob of definitions and logic for simple transactions
 /  To be refactored when I figure out what I'm doing
 */
 
 class AccountManager
-{
+{ 
+  private:
+    //Just to ensure openssl's working properly
+    SHA256_CTX state;
   public:
     void AddAccount(void){
 	/*
