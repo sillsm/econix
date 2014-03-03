@@ -16,7 +16,7 @@ before_install:
   - sudo cp *.a /usr/lib
   # get yourself back to the right dir
   - cd /home/travis/build/sillsm/econix
-  - sudo apt-get install libssl
+  - sudo apt-get install libssl-dev
 
 before_script:
   - mkdir build
