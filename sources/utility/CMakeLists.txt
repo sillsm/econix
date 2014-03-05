@@ -26,7 +26,7 @@ option(CUSTOM_LIB_OPENSSL "Use custom-built OPENSSL library." OFF)
 	  set(OPENSSL_LIBRARY_A "Point me to OPENSSL library A" CACHE FILEPATH "description")
 	  set(OPENSSL_LIBRARY_B "Point me to OPENSSL library B" CACHE FILEPATH "description")
 	  
-	  find_package(OPENSSL REQUIRED)
+	  find_package(OpenSSL QUIET)
 	  include_directories(${OPENSSL_INCLUDE})
 	  #add_library(utility ${OPENSSL_INCLUDE} ${UTILITY_SRCS})
 	  message(${OPENSSL_INCLUDE})
@@ -36,7 +36,7 @@ option(CUSTOM_LIB_OPENSSL "Use custom-built OPENSSL library." OFF)
 	else()	
 	  # E.g. for Ubuntu and Debian: use package manager to get libgtest-dev, build it, then use
 	  # standard cmake
-	  find_package(OPENSSL REQUIRED)
+	  find_package(OpenSSL REQUIRED)
 	  include_directories(${OPENSSL_INCLUDE})  
 	  #add_library(utility ${OPENSSL_INCLUDE})
       #add_library(utility ${UTILITY_SRCS})	  
