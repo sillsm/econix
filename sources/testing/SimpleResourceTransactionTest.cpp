@@ -10,6 +10,27 @@ TEST(SimpleResourceTransactionTest, FirstTest) {
  //Verify the second account now has 400 units of the resource
  
  AccountManager am;
- am.AddAccount();
- EXPECT_EQ(2 + 2, 4);
+ Client clientA;
+ Client clientB;
+ EXPECT_EQ(am.Accounts, 0);
+ am.AddAccount(clientA);
+ am.AddAccount(clientB);
+ EXPECT_EQ(am.Accounts, 2);
+ 
+ Resource gold;
+ gold.addField("Value");
+ 
+ Asset asset = gold();
+ asset.set("Value", 500);
+ am.CreateAsset(gold, clientA, asset);
+ 
+ EXPECT_EQ(am.QUERY(gold, "Value"), 500);
+ am.TransferAsset(gold, clientA, clientB, 400);
+ 
+ //Attempting to add duplicate accounts here should be ignored
+ am.AddAccount(clientA);
+ am.AddAccount(clientB);
+ 
+ EXPECT_EQ(am.QUERY(clientA, gold, "Value"), 100);
+ EXPECT_EQ(am.QUERY(clientB, gold, "Value"), 400);
 }
