@@ -27,7 +27,7 @@ before_script:
   - cmake ..
   - pwd
 
-script: "make --debug=v && pwd && ./CppTesting -v"
+script: "make -std=c++11 --debug=v && pwd && ./CppTesting -v"
 
 notifications:
   email:
