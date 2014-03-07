@@ -12,25 +12,26 @@ TEST(SimpleResourceTransactionTest, FirstTest) {
  AccountManager am;
  Client clientA;
  Client clientB;
- EXPECT_EQ(am.Accounts, 0);
+ EXPECT_EQ(am.AccountsSize(), 0);
  am.AddAccount(clientA);
  am.AddAccount(clientB);
- EXPECT_EQ(am.Accounts, 2);
+ EXPECT_EQ(am.AccountsSize(), 2);
  
- Resource gold;
- gold.addField("Value");
- 
- Asset asset = gold();
- asset.set("Value", 500);
- am.CreateAsset(gold, clientA, asset);
- 
- EXPECT_EQ(am.QUERY(gold, "Value"), 500);
- am.TransferAsset(gold, clientA, clientB, 400);
+ ResourceFactory gold;
+ Resource assetA = gold.MakeResource("Value", 500);
+
+ am.TransferAsset(assetA, clientA);
+ EXPECT_EQ(am.QueryAsset(gold, "Value"), 500);
+ EXPECT_EQ(am.QueryClient(gold, "Value", clientA), 500);
+ EXPECT_EQ(am.QueryClient(gold, "Value", clientB), 0);
  
  //Attempting to add duplicate accounts here should be ignored
  am.AddAccount(clientA);
  am.AddAccount(clientB);
- 
- EXPECT_EQ(am.QUERY(clientA, gold, "Value"), 100);
- EXPECT_EQ(am.QUERY(clientB, gold, "Value"), 400);
+
+ Resource assetB = gold.MakeResource("Value", 400);
+ am.TransferAsset(assetB, clientA, clientB);
+ EXPECT_EQ(am.QueryAsset(gold, "Value"), 500);
+ EXPECT_EQ(am.QueryClient(gold, "Value", clientA), 100);
+ EXPECT_EQ(am.QueryClient(gold, "Value", clientB), 400);
 }
