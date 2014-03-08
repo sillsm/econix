@@ -46,9 +46,11 @@ class CryptographicEntity{
 		pri_key[pri_len] = '\0';
 		pub_key[pub_len] = '\0';
 
-	    printf("\n%s\n%s\n", pri_key, pub_key);
+	    //printf("\n%s\n%s\n", pri_key, pub_key);
 		PublicKey = std::string(pub_key);
 		PrivateKey = std::string(pri_key);
+		//std::cout << PublicKey << std::endl;
+		//std::cout << PrivateKey << std::endl;
 	}
 
 };
@@ -60,6 +62,7 @@ class Client : public CryptographicEntity{
 };
 //TODO: refactor for asset factory separate from asset packets
 //TODO: incorporate a JSON read/write small lib
+//TODO: rewrite to support OpenPGP messages; reconsider public-key for every asset architecture
 class Resource : public CryptographicEntity{	
   public:
 	  std::unordered_map<std::string, std::size_t> m_Packet;
@@ -93,6 +96,10 @@ class AccountManager: public CryptographicEntity
 	/ When client tries to do stuff, they give you their public key
 	/ Use it as a hash value to look up their account info
 	*/
+		if (Accounts.find(cl.PublicKey) == Accounts.end()){
+			std::unordered_map<std::string, double> addme;
+			Accounts[cl.PublicKey] = addme;
+		}
 	}
 
 	std::size_t AccountsSize(){
