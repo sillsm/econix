@@ -4,3 +4,4 @@ econix
 
 RESTful economy/transaction/contracts simulator for games
 
+See test code for current features/documentation.
