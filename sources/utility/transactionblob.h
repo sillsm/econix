@@ -65,7 +65,7 @@ class Client : public CryptographicEntity{
 //TODO: rewrite to support OpenPGP messages; reconsider public-key for every asset architecture
 class Resource : public CryptographicEntity{	
   public:
-	  std::unordered_map<std::string, std::size_t> m_Packet;
+	  std::unordered_map<std::string, double> m_Packet;
 };
 
 class ResourceFactory : public CryptographicEntity{
@@ -73,7 +73,7 @@ class ResourceFactory : public CryptographicEntity{
 	  ResourceFactory(){
 
 	  }
-	  Resource MakeResource(std::string str, std::size_t val){
+	  Resource MakeResource(std::string str, double val){
 		  Resource ret;
 		  ret.PublicKey = PublicKey;
 		  ret.PrivateKey = "";
@@ -88,6 +88,7 @@ class AccountManager: public CryptographicEntity
     //Just to ensure openssl's working properly
     //SHA256_CTX state;
 	  std::unordered_map<std::string, std::unordered_map<std::string, double>> Accounts;
+	  std::unordered_map<std::string, double> m_ResourceLedger;
   public:
     void AddAccount(Client & cl){
 	/*
@@ -106,22 +107,81 @@ class AccountManager: public CryptographicEntity
 		return Accounts.size();
 	}
 
-	void TransferAsset(Resource res, Client client){
-
+	void TransferAsset(Resource res, Client & client){
+		auto it = Accounts.find(client.PublicKey);
+		if (it == Accounts.end()){ //Client not listed
+			return;
+		}
+		else { //Client listed
+			if ((it->second).find(res.PublicKey) == (it->second).end()){//client doesn't hve resource in ledger
+				(it->second)[res.PublicKey] = res.m_Packet["Value"];
+			}
+			else{
+				(it->second)[res.PublicKey] += res.m_Packet["Value"];
+			}
+			m_ResourceLedger[res.PublicKey] += res.m_Packet["Value"];
+		}
 	}
 
 	void TransferAsset(Resource res, Client from, Client to){
+		//Check that both client from and to exist.
+		//if either does not, return
+		auto fromit = Accounts.find(from.PublicKey);
+		auto toit = Accounts.find(to.PublicKey);
+		if (fromit == Accounts.end() || toit == Accounts.end()) return;
+
+		auto value = res.m_Packet["Value"];
+
+		//Check if 'from' has the resource
+		//if not, assign from (-resource value)
+		// else, -= froms resource value
+		auto fromResource = Accounts[from.PublicKey].find(res.PublicKey);
+		if (fromResource != Accounts[from.PublicKey].end())
+			Accounts[from.PublicKey][res.PublicKey] -= value;
+		else
+			Accounts[from.PublicKey][res.PublicKey] = -value;
+
+		//Check if 'to' has the resource
+		//if not, assign 'to' (resource valu)
+		//else, += to's resource value
+		auto toResource = Accounts[to.PublicKey].find(res.PublicKey);
+		if (toResource != Accounts[to.PublicKey].end())
+			Accounts[to.PublicKey][res.PublicKey] += value;
+		else
+			Accounts[to.PublicKey][res.PublicKey] = value;
+
+		return;
 
 	}
 
 	std::size_t QueryAsset(ResourceFactory res, std::string){
-
-		return 0;
+		if ((m_ResourceLedger).find(res.PublicKey) == (m_ResourceLedger).end()){ //don't got that resource
+			return 0;
+		}
+		else{
+			return m_ResourceLedger[res.PublicKey];
+		}
 	}
 
 	std::size_t QueryClient(ResourceFactory res, std::string, Client client){
-		return 0;
+		//check if client listed
+		//if so get their map
+		//then query their resource
+		//or return 0
+		auto it = Accounts.find(client.PublicKey);
+		if (it == Accounts.end()){ //Client not listed
+			return 0;
+		}
+		else { //Client listed
+			if ((it->second).find(res.PublicKey) == (it->second).end()){//client doesn't hve resource in ledger
+				return 0;
+			}
+			else{
+				//(it->second)[res.PublicKey] += res.m_Packet["Value"];
+				return Accounts[client.PublicKey][res.PublicKey];
+			}
+			return 0;
+		}
 	}
-
 };
 

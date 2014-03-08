@@ -34,4 +34,6 @@ TEST(SimpleResourceTransactionTest, FirstTest) {
  EXPECT_EQ(am.QueryAsset(gold, "Value"), 500);
  EXPECT_EQ(am.QueryClient(gold, "Value", clientA), 100);
  EXPECT_EQ(am.QueryClient(gold, "Value", clientB), 400);
+
+ //Try transfering resource from non-registered client; account error should be thrown and caught
 }
