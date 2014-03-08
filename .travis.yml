@@ -3,8 +3,23 @@ language: cpp
 compiler: gcc
 
 before_install:
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -qq
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8 -std=c++11" CC="gcc-4.8 -std=c++11"; fi
   - sudo apt-get install -qq cmake 
+  - sudo apt-get install libgtest-dev
+  - sudo apt-get install cmake # install cmake
+  - pwd
+  - cd /usr/src/gtest
+  - sudo cmake CMakeLists.txt
+  - sudo make
+ 
+  # copy or symlink libgtest.a and libgtest_main.a to your /usr/lib folder
+  - sudo cp *.a /usr/lib
+  # get yourself back to the right dir
+  - cd /home/travis/build/sillsm/econix
+  - sudo apt-get install openssl libssl-dev
 
 before_script:
   - mkdir build
@@ -12,7 +27,7 @@ before_script:
   - cmake ..
   - pwd
 
-script: "make && pwd && ./CppTesting -v"
+script: "make --debug=v && pwd && ./CppTesting -v"
 
 notifications:
   email:

@@ -1,5 +1,6 @@
 ## CMakeLists.txt
-option(Econix_build_cpp_tests "Build all of foo's c++ unit tests." ON)
+include_directories(..)
+option(Econix_build_cpp_tests "Build all of Econix's c++ unit tests." ON)
 project(EconixCPlusPlusTesting)
 cmake_minimum_required(VERSION 2.8)
 include_directories("/usr/local/include")
@@ -10,74 +11,62 @@ set(cpp_testing_SOURCES
 	SimpleResourceTransactionTest.cpp
 	TestBase.h
 	)
-	
 ########################### GTEST
-# Enable ExternalProject CMake module
-INCLUDE(ExternalProject)
- 
-# Set default ExternalProject root directory
-SET_DIRECTORY_PROPERTIES(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/third_party)
- 
-# Add gtest
-# http://stackoverflow.com/questions/9689183/cmake-googletest
-ExternalProject_Add(
-    googletest
-    URL http://googletest.googlecode.com/files/gtest-1.6.0.zip
-
-    # TIMEOUT 10
-    # # Force separate output paths for debug and release builds to allow easy
-    # # identification of correct lib in subsequent TARGET_LINK_LIBRARIES commands
-     CMAKE_ARGS -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG:PATH=DebugLibs
-                -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE:PATH=ReleaseLibs
-                -Dgtest_force_shared_crt=ON
-    # Disable install step
-    INSTALL_COMMAND ""
-    # Wrap download, configure and build steps in a script to log output
-    LOG_DOWNLOAD ON
-    LOG_CONFIGURE ON
-    LOG_BUILD ON
-	)
-	
- # Specify include dir
-ExternalProject_Get_Property(googletest source_dir)
-include_directories(${source_dir}/include)
-
-# Add compiler flag for MSVC 2012
-if(MSVC_VERSION EQUAL 1700)
-  add_definitions(-D_VARIADIC_MAX=10)
-endif()
 
 SET(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 
-
-# Specify MainTest's link libraries
-
-
-#END add gtest
-
 if (Econix_build_cpp_tests)
-    enable_testing()
-	include_directories(${GTEST_INCLUDE_DIR})
-    add_executable(CppTesting ${cpp_testing_SOURCES} )
-    add_dependencies(CppTesting googletest)
-
-ExternalProject_Get_Property(googletest binary_dir)
-if(MSVC)
-  set(Suffix ".lib")
-  target_link_libraries(
-    CppTesting
-    debug ${binary_dir}/Debug/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    optimized ${binary_dir}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    ${Pthread})
-else()
-  set(Suffix ".a")
-  set(Pthread "-pthread")
-  target_link_libraries(
-    CppTesting
-    debug ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    optimized ${binary_dir}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${Suffix}
-    ${Pthread})
-endif()
-
-
+    option(CUSTOM_LIB_GTEST "Use custom-built gtest library." OFF)
+    Message(${CMAKE_SOURCE_DIR}/Libraries/bin/src/googletest/include/gtest/)
+	
+    enable_testing()	
+	find_package(GTest QUIET)
+	if (CUSTOM_LIB_GTEST)
+	  # E.g. for Win 7 x86: point to pre-built static libs
+	  message("could not find it")
+      set(GTEST_INCLUDE "Point me to GTEST include" CACHE FILEPATH "description")
+	  set(GTEST_LIBRARY_BIG "Point me to GTEST libraries" CACHE FILEPATH "description")
+	  
+	  find_package(GTest QUIET)
+	  include_directories(${GTEST_INCLUDE})
+      add_executable(CppTesting ${cpp_testing_SOURCES} )
+      #add_dependencies(CppTesting GTest)    
+	  add_dependencies(CppTesting GTest utility)
+	  target_link_libraries(CppTesting utility ${GTEST_LIBRARY_BIG} ${PThread} )
+	  message(${GTEST_INCLUDE_DIR})
+	else()	
+	  # E.g. for Ubuntu and Debian: use package manager to get libgtest-dev, build it, then use
+	  # standard cmake
+	  find_package(GTest REQUIRED)
+	  include_directories(${GTEST_INCLUDE})
+      add_executable(CppTesting ${cpp_testing_SOURCES} )
+      add_dependencies(CppTesting GTest utility)    
+	  target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} pthread )
+    endif()	
+	
+    if (CUSTOM_LIB_OPENSSL)
+	  # E.g. for Win 7 x86: point to pre-built static libs
+      set(OPENSSL_INCLUDE "Point me to OPENSSL include" CACHE FILEPATH "description")
+	  set(OPENSSL_LIBRARY_A "Point me to OPENSSL library A" CACHE FILEPATH "description")
+	  set(OPENSSL_LIBRARY_B "Point me to OPENSSL library B" CACHE FILEPATH "description")
+	  
+	  find_package(OpenSSL QUIET)
+	  include_directories(${OPENSSL_INCLUDE})
+	  #add_library(utility ${OPENSSL_INCLUDE} ${UTILITY_SRCS})
+	  message(${OPENSSL_INCLUDE})
+      #add_dependencies(CppTesting GTest)    
+	  #add_library(utility ${UTILITY_SRCS})
+	  target_link_libraries(CppTesting ${OPENSSL_LIBRARY_A} ${OPENSSL_LIBRARY_B} )
+	else()	
+	  # E.g. for Ubuntu and Debian: use package manager to get libgtest-dev, build it, then use
+	  # standard cmake
+	  find_package(OpenSSL REQUIRED)
+	  include_directories(${OPENSSL_INCLUDE})  
+	  #add_library(utility ${OPENSSL_INCLUDE})
+      #add_library(utility ${UTILITY_SRCS})	  
+	  target_link_libraries(CppTesting ${OPENSSL_LIBRARIES})
+    endif()	
+	
+	
+	
 endif()
