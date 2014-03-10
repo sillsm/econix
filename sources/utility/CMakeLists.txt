@@ -6,9 +6,10 @@ project(EconixExec)
 
 SET(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 
-set( UTILITY_SRCS
-     transactionblob.h
-	 transactionblob.cpp
+set(UTILITY_SRCS
+    picojson.h
+    transactionblob.h
+    transactionblob.cpp
    )
    
  include_directories( "." 

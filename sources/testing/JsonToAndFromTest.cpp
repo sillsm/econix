@@ -1,7 +1,11 @@
-#include "SimpleResourceTransactionTest.h"
-#include "utility/transactionblob.h"
 
-TEST(SimpleResourceTransactionTest, FirstTest) {
+#include "TestBase.h"
+
+#include "utility/transactionblob.h"
+#include "utility/picojson.h"
+
+
+TEST(JSONTest, FirstTest) {
  //Add two new accounts
  //Define a new resource
  //Give the first account 500 units of the resource

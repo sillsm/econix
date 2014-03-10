@@ -7,6 +7,8 @@ include_directories("/usr/local/include")
 link_directories("/usr/local/lib")
 set(cpp_testing_SOURCES
     main.cpp
+	JsonToAndFromTest.h
+	JsonToAndFromTest.cpp
 	SimpleResourceTransactionTest.h
 	SimpleResourceTransactionTest.cpp
 	TestBase.h
