@@ -18,7 +18,6 @@ set( UTILITY_SRCS
 
 add_library(utility ${UTILITY_SRCS})
 
-target_link_libraries(utility ${GLOBAL_BOOST}) 
 
 option(CUSTOM_LIB_OPENSSL "Use custom-built OPENSSL library." OFF)
 

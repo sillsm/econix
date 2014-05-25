@@ -36,4 +36,8 @@ if(MSVC_VERSION EQUAL 1700)
   add_definitions(-D_VARIADIC_MAX=10)
 endif()
 
+# Add support for (statically included) Boost::lockfree
+
+
+
 SET(CMAKE_CXX_FLAGS_DEBUG "/MTd")
