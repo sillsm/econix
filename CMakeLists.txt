@@ -22,8 +22,6 @@ IF(Boost_FOUND)
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 ENDIF(Boost_FOUND)
 
-SET(GLOBAL_BOOST ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_REGEX_LIBRARY})
-
 # Add subdirs
 
 add_subdirectory( "sources/executable" )
