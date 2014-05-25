@@ -12,11 +12,13 @@ set( UTILITY_SRCS
    )
    
  include_directories( "." 
+ ${Boost_INCLUDE_DIRS}
  ${UTILITY_SRCS}
  ${OPENSSL_INCLUDE}
            )
 
-add_library(utility ${UTILITY_SRCS})
+target_link_libraries(utility ${Boost_LIBRARY_DIRS} )
+
 
 
 option(CUSTOM_LIB_OPENSSL "Use custom-built OPENSSL library." OFF)
