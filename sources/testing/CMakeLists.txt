@@ -70,3 +70,5 @@ if (Econix_build_cpp_tests)
 	
 	
 endif()
+# # something
+target_link_libraries(CppTesting ${Boost_LIBRARY_DIRS} )
