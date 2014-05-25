@@ -23,7 +23,7 @@ add_subdirectory( "sources/testing" )
 
 # Get and define libraries globally for all projects
 # Boost 1.55.0
-FIND_PACKAGE(Boost 1.55.0 REQUIRED COMPONENTS system thread regex lockfree)
+FIND_PACKAGE(Boost 1.55.0 REQUIRED COMPONENTS system thread regex)
 IF(Boost_FOUND)
   INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
