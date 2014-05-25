@@ -10,6 +10,8 @@
 #include <openssl/engine.h>
 #include <openssl/bio.h>
 #include <openssl/pem.h>
+
+#include <boost/lockfree/queue.hpp> //Boost Test
 /*
 /  Blob of definitions and logic for simple transactions
 /  To be refactored when I figure out what I'm doing
