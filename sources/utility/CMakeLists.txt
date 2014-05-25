@@ -16,6 +16,8 @@ set( UTILITY_SRCS
  ${UTILITY_SRCS}
  ${OPENSSL_INCLUDE}
            )
+           
+add_library(utility ${UTILITY_SRCS})
 
 target_link_libraries(utility ${Boost_LIBRARY_DIRS} )
 
