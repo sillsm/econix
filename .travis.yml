@@ -9,7 +9,7 @@ before_install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8 -std=c++11" CC="gcc-4.8 -std=c++11"; fi
   - sudo apt-get install -qq cmake 
   - sudo apt-get install libgtest-dev
-  - sudo apt-get install libboost-all-dev #install all Boost libs
+  - sudo apt-get install libboost1.55-all-dev #install all Boost libs
   - sudo apt-get install cmake # install cmake
   - pwd
   - cd /usr/src/gtest
