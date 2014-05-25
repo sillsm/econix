@@ -14,7 +14,17 @@ ENDIF(MSVC)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/helper/")
 set( EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR} )
 
+# Get and define libraries globally for all projects
+# Boost 1.55.0
+FIND_PACKAGE(Boost 1.55.0 REQUIRED COMPONENTS system thread regex lockfree)
+IF(Boost_FOUND)
+  INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+  LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+ENDIF(Boost_FOUND)
 
+SET(GLOBAL_BOOST ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_REGEX_LIBRARY})
+
+# Add subdirs
 
 add_subdirectory( "sources/executable" )
 add_subdirectory( "sources/utility" )
