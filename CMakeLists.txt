@@ -20,3 +20,13 @@ add_subdirectory( "sources/executable" )
 add_subdirectory( "sources/utility" )
 add_subdirectory( "sources/testing" )
 
+
+# Get and define libraries globally for all projects
+# Boost 1.55.0
+FIND_PACKAGE(Boost 1.55.0 REQUIRED COMPONENTS system thread regex lockfree)
+IF(Boost_FOUND)
+  INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+  LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+ENDIF(Boost_FOUND)
+
+SET(GLOBAL_BOOST ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_REGEX_LIBRARY})
