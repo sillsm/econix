@@ -14,6 +14,9 @@ ENDIF(MSVC)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/helper/")
 set( EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR} )
 
+# Set include path
+include_directories( ./sources/ )
+
 # Get and define libraries globally for all projects
 # Boost 1.55.0
 FIND_PACKAGE(Boost 1.55.0 REQUIRED COMPONENTS system thread regex)
@@ -43,7 +46,7 @@ file(GLOB UTILITY_SRCS
 add_library(utility ${UTILITY_SRCS})
 target_link_libraries(utility ${Boost_LIBRARY_DIRS} )
 
-include_directories(. ./sources/ ./sources/utility/)
+
 
 file(GLOB cpp_testing_SOURCES
     "sources/testing/*.h"
@@ -52,9 +55,3 @@ file(GLOB cpp_testing_SOURCES
 add_executable(CppTesting ${cpp_testing_SOURCES} )
 add_dependencies(CppTesting GTest utility)    
 target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} ${OPENSSL_LIBRARIES} pthread )
-
-
-#add_subdirectory( "sources/executable" )
-#add_subdirectory( "sources/utility" )
-#add_subdirectory( "sources/testing" )
-
