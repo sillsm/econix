@@ -17,28 +17,42 @@ set( EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR} )
 # Set include path
 include_directories( ./sources/ )
 
-# Get and define libraries globally for all projects
-# Boost 1.55.0
+#				#	
+#				#
+# Pre-compiled Deps Section	#
+#				#
+#				#
+
+#				#
+# Boost 1.55.0			#
+#				#
 FIND_PACKAGE(Boost 1.55.0 REQUIRED COMPONENTS system thread regex)
 IF(Boost_FOUND)
   INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 ENDIF(Boost_FOUND)
 
-#Gtest
+#				#
+# Gtest				#
+#				#
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE})
 
-#Openssl
+#				#
+#Openssl			#
+#				#
 find_package(OpenSSL REQUIRED)
 include_directories(${OPENSSL_INCLUDE})  
-#add_library(utility ${OPENSSL_INCLUDE})
-#add_library(utility ${UTILITY_SRCS})	  
 	  
-# Add subdirs
+#				#
+#				#
+# Projects			#
+#				#
+#				#
 
-# other stuff
-
+#				#
+# Utility Project (1 lib) 	#
+#				#
 file(GLOB UTILITY_SRCS
     "sources/utility/*.h"
     "sources/utility/*.cpp"
@@ -47,7 +61,9 @@ add_library(utility ${UTILITY_SRCS})
 target_link_libraries(utility ${Boost_LIBRARY_DIRS} )
 
 
-
+#				#
+# Testing Project (1 executable)#
+#				#
 file(GLOB cpp_testing_SOURCES
     "sources/testing/*.h"
     "sources/testing/*.cpp"
@@ -55,3 +71,6 @@ file(GLOB cpp_testing_SOURCES
 add_executable(CppTesting ${cpp_testing_SOURCES} )
 add_dependencies(CppTesting GTest utility)    
 target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} ${OPENSSL_LIBRARIES} pthread )
+
+
+### End of Cmake ###
