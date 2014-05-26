@@ -22,10 +22,16 @@ IF(Boost_FOUND)
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 ENDIF(Boost_FOUND)
 
+#Gtest
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE})
 
-
+#Openssl
+find_package(OpenSSL REQUIRED)
+include_directories(${OPENSSL_INCLUDE})  
+#add_library(utility ${OPENSSL_INCLUDE})
+#add_library(utility ${UTILITY_SRCS})	  
+	  
 # Add subdirs
 
 
@@ -35,8 +41,7 @@ file(GLOB cpp_testing_SOURCES
 )
 add_executable(CppTesting ${cpp_testing_SOURCES} )
 add_dependencies(CppTesting GTest utility)    
-target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} pthread )
-
+target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} ${OPENSSL_LIBRARIES} pthread )
 
 
 
