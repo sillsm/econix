@@ -34,10 +34,6 @@ include_directories(${OPENSSL_INCLUDE})
 	  
 # Add subdirs
 
-add_subdirectory( "sources/executable" )
-add_subdirectory( "sources/utility" )
-add_subdirectory( "sources/testing" )
-
 # other stuff
 
 file(GLOB UTILITY_SRCS
@@ -56,4 +52,9 @@ file(GLOB cpp_testing_SOURCES
 add_executable(CppTesting ${cpp_testing_SOURCES} )
 add_dependencies(CppTesting GTest utility)    
 target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} ${OPENSSL_LIBRARIES} pthread )
+
+
+add_subdirectory( "sources/executable" )
+add_subdirectory( "sources/utility" )
+add_subdirectory( "sources/testing" )
 
