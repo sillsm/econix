@@ -27,7 +27,6 @@ if (Econix_build_cpp_tests)
   add_executable(CppTesting ${cpp_testing_SOURCES} )
   add_dependencies(CppTesting GTest utility)    
   target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} pthread )
-endif()	
 	
     if (CUSTOM_LIB_OPENSSL)
 	  # E.g. for Win 7 x86: point to pre-built static libs
