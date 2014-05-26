@@ -16,6 +16,11 @@ set(cpp_testing_SOURCES
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
+MESSAGE ( HI)
+MESSAGE(HI)
+Message(${Boost_LIBRARY_DIRS})
+Message(${Boost_INCLUDE_DIRS})
+
 SET(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 
 if (Econix_build_cpp_tests)
