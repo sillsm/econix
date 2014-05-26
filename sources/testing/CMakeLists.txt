@@ -13,8 +13,8 @@ set(cpp_testing_SOURCES
 	)
 ########################### GTEST
 
-INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
-LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+include_directories(${Boost_INCLUDE_DIRS})
+link_directories(${Boost_LIBRARY_DIRS})
 
 SET(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 
