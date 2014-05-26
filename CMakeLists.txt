@@ -22,18 +22,22 @@ IF(Boost_FOUND)
   LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 ENDIF(Boost_FOUND)
 
-# Add subdirs
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE})
 
-Message(outter CMAKE)
-Message(${Boost_INCLUDE_DIRS})
-Message(${Boost_LIBRARY_DIRS})
-Message(outter CMAKE)
+
+# Add subdirs
 
 
 file(GLOB cpp_testing_SOURCES
     "sources/testing/*.h"
     "sources/testing/*.cpp"
 )
+add_executable(CppTesting ${cpp_testing_SOURCES} )
+add_dependencies(CppTesting GTest utility)    
+target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} pthread )
+
+
 
 
 add_subdirectory( "sources/executable" )
