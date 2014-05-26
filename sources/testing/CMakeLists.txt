@@ -17,7 +17,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
 Message(inner CMAKE)
-Message(${Boost_INCLUDE_DIRS}))
+Message(${Boost_INCLUDE_DIRS})
 Message(${Boost_LIBRARY_DIRS})
 Message(inner CMAKE)
 
