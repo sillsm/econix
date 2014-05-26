@@ -5,12 +5,12 @@ project(EconixCPlusPlusTesting)
 cmake_minimum_required(VERSION 2.8)
 include_directories("/usr/local/include")
 link_directories("/usr/local/lib")
-set(cpp_testing_SOURCES
-    main.cpp
-	SimpleResourceTransactionTest.h
-	SimpleResourceTransactionTest.cpp
-	TestBase.h
-	)
+
+file(GLOB cpp_testing_SOURCES
+    "*.h"
+    "*.cpp"
+)
+
 ########################### GTEST
 
 include_directories(${Boost_INCLUDE_DIRS})
