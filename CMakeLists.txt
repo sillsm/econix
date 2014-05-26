@@ -54,7 +54,7 @@ add_dependencies(CppTesting GTest utility)
 target_link_libraries(CppTesting utility ${GTEST_LIBRARIES} ${OPENSSL_LIBRARIES} pthread )
 
 
-add_subdirectory( "sources/executable" )
-add_subdirectory( "sources/utility" )
-add_subdirectory( "sources/testing" )
+#add_subdirectory( "sources/executable" )
+#add_subdirectory( "sources/utility" )
+#add_subdirectory( "sources/testing" )
 
