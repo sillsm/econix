@@ -1,6 +1,6 @@
 #include "SimpleResourceTransactionTest.h"
 #include "utility/transactionblob.h"
-#include <boost/system/error_code.hpp> 
+#include <boost/lockfree/queue.hpp> 
 
 TEST(SimpleResourceTransactionTest, FirstTest) {
  //Add two new accounts
