@@ -41,6 +41,7 @@ file(GLOB UTILITY_SRCS
 add_library(utility ${UTILITY_SRCS})
 target_link_libraries(utility ${Boost_LIBRARY_DIRS} )
 
+include_directories(${UTILITY_SRCS})
 
 file(GLOB cpp_testing_SOURCES
     "sources/testing/*.h"
