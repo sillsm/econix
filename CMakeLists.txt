@@ -34,6 +34,13 @@ include_directories(${OPENSSL_INCLUDE})
 	  
 # Add subdirs
 
+file(GLOB UTILITY_SRCS
+    "sources/utility/*.h"
+    "sources/utility/*.cpp"
+)
+add_library(utility ${UTILITY_SRCS})
+target_link_libraries(utility ${Boost_LIBRARY_DIRS} )
+
 
 file(GLOB cpp_testing_SOURCES
     "sources/testing/*.h"
