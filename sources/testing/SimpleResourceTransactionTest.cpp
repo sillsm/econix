@@ -9,6 +9,7 @@ TEST(SimpleResourceTransactionTest, FirstTest) {
  //The first account transfers 400 units of the resource to the second account
  //Verify the first account now has 100 units of resource
  //Verify the second account now has 400 units of the resource
+ // Small Mod
  
  AccountManager am;
  Client clientA;
