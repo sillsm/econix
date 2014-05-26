@@ -25,7 +25,7 @@ ENDIF(Boost_FOUND)
 # Add subdirs
 
 Message(outter CMAKE)
-Message(${Boost_INCLUDE_DIRS}))
+Message(${Boost_INCLUDE_DIRS})
 Message(${Boost_LIBRARY_DIRS})
 Message(outter CMAKE)
 
