@@ -16,12 +16,10 @@ set(cpp_testing_SOURCES
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
-MESSAGE ( HI)
-MESSAGE(HI)
+Message(inner CMAKE)
+Message(${Boost_INCLUDE_DIRS}))
 Message(${Boost_LIBRARY_DIRS})
-Message(${Boost_INCLUDE_DIRS})
-
-SET(CMAKE_CXX_FLAGS_DEBUG "/MTd")
+Message(inner CMAKE)
 
 if (Econix_build_cpp_tests)
     option(CUSTOM_LIB_GTEST "Use custom-built gtest library." OFF)
