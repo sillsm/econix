@@ -30,6 +30,12 @@ Message(${Boost_LIBRARY_DIRS})
 Message(outter CMAKE)
 
 
+file(GLOB cpp_testing_SOURCES
+    "sources/testing/*.h"
+    "sources/testing/*.cpp"
+)
+
+
 add_subdirectory( "sources/executable" )
 add_subdirectory( "sources/utility" )
 add_subdirectory( "sources/testing" )
