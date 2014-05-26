@@ -1,5 +1,5 @@
 #include "SimpleResourceTransactionTest.h"
-#include "sources/utility/transactionblob.h"
+#include "utility/transactionblob.h"
 #include <boost/lockfree/queue.hpp> 
 
 TEST(SimpleResourceTransactionTest, FirstTest) {
