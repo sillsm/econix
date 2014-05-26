@@ -37,12 +37,14 @@ ENDIF(Boost_FOUND)
 #				#
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE})
+link_directories(${GTEST_LIBRARIES})
 
 #				#
 #Openssl			#
 #				#
 find_package(OpenSSL REQUIRED)
 include_directories(${OPENSSL_INCLUDE})  
+link_directories(${OPENSSL_LIBRARIES})
 	  
 #				#
 #				#
