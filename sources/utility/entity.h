@@ -46,6 +46,9 @@
 //   Market allows Clients to submit Packets. It provides two functions.
 //     1. Passive matching and signing of Packets.
 //     2. A "Book" of depth n. Clients peruse books for Packets, then sign and execute satisfactory contracts.
+//
+//   Impl. 1: clients are able to temporarily delegate their authority to sign ks to Market
+//   Impl. 2: clients only ever make ks with Market. Market acts as intermediary for all transactions.
 
 
 
