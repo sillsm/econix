@@ -54,8 +54,12 @@
 //  a. Client A goes to Market. Client A creates new entity, ClientA_at_Market. Gives Market private key for this entity.
 //     ClientA makes certain ks with ClientA_at_Market (limited liability funding).
 //     Market goes ahead and signs whatever Ks it wants on behalf of ClientA_at_Market. A on hook to extent of liability.
-
-
+// 
+//  b. [the more attractive] To delegate packet authority, the signer merely lists you as a required authenticator!
+//     E.g. A tells Market: enter me into binding buy and sell agreements I'd find advantageous.
+//     Market engages in transactions where A is listed as a required signing authority on packets.
+//     A incurs a monitoring cost- A shouldn't sign all packets without inspecting them, but it probably
+//     doesn't have to inspect all of them before it signs because of CBA
 
 
 #endif
