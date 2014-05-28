@@ -36,6 +36,18 @@
 //    If B agrees: mirrors message but adds the required approvers signature
 //
 //
+//
+//   Level Two comprrises automating and combining the "Packet" primitive to simulate
+//   basic social and financial institutions.
+//   Practically speaking this means making a small API and a simple .proto around the 
+//   "Message" portion of "Packet".
+//
+//   E.g. Market. 
+//   Market allows Clients to submit Packets. It provides two functions.
+//     1. Passive matching and signing of Packets.
+//     2. A "Book" of depth n. Clients peruse books for Packets, then sign and execute satisfactory contracts.
+
+
 
 
 #endif
