@@ -49,6 +49,11 @@
 //
 //   Impl. 1: clients are able to temporarily delegate their authority to sign ks to Market
 //   Impl. 2: clients only ever make ks with Market. Market acts as intermediary for all transactions.
+//
+//   To dig further into Impl. 1, there are two ways that come to mind. 
+//  a. Client A goes to Market. Client A creates new entity, ClientA_at_Market. Gives Market private key for this entity.
+//     ClientA makes certain ks with ClientA_at_Market (limited liability funding).
+//     Market goes ahead and signs whatever Ks it wants on behalf of ClientA_at_Market. A on hook to extent of liability.
 
 
 
