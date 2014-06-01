@@ -11,7 +11,7 @@ SET( CMAKE_CXX_FLAGS_DEBUG  "-O2 -Wno-unused-result" )
 SET( CMAKE_CXX_FLAGS_RELEASE  "-O2 -Wno-unused-result" )
 ENDIF(MSVC)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/helper/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/" )
 set( EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR} )
 
 # Set include path
@@ -22,6 +22,8 @@ include_directories( ./sources/ )
 # Pre-compiled Deps Section	#
 #				#
 #				#
+
+find_package(Event REQUIRED)
 
 #				#
 # Boost 1.55.0			#
@@ -46,6 +48,8 @@ link_directories(${THRIFT_LIBS})
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE})
 link_directories(${GTEST_LIBRARIES})
+
+
 
 #				#
 #Openssl			#
