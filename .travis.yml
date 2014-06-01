@@ -18,7 +18,7 @@ before_install:
   #compiling thrift
   - cd thrift
   - ./bootstrap.sh
-  - ./configure
+  - ./configure --disable-more-warnings
   - sudo make compiler/cpp
   - sudo make install compiler/cpp
   - sudo make lib/cpp
