@@ -36,9 +36,9 @@ ENDIF(Boost_FOUND)
 # Apache Thrift (version)
 # https://github.com/apache/thrift
 # 
-# find_package(Thrift REQUIRED)
-# include_directories(${THRIFT_INCLUDE_DIR})
-# link_directories(${THRIFT_LIBS})
+find_package(Thrift REQUIRED)
+include_directories(${THRIFT_INCLUDE_DIR})
+link_directories(${THRIFT_LIBS})
 
 #				#
 # Gtest				#
