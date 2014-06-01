@@ -24,14 +24,14 @@ before_install:
   - cd ..
   - thrift -version
   #end compiling thrift
-  - 
+  #compiling gtest
   - pwd
   - cd /usr/src/gtest
   - sudo cmake CMakeLists.txt
   - sudo make
- 
   # copy or symlink libgtest.a and libgtest_main.a to your /usr/lib folder
   - sudo cp *.a /usr/lib
+  #end compiling gtest
   # get yourself back to the right dir
   - cd /home/travis/build/sillsm/econix
   - sudo apt-get install openssl libssl-dev
