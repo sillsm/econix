@@ -19,8 +19,10 @@ before_install:
   - cd thrift
   - ./bootstrap.sh
   - ./configure
+  - sudo make
+  - sudo make install
   - cd ..
-  - sudo apt-get install thrift-compiler
+  - thrift -version
   #end compiling thrift
   - 
   - pwd
