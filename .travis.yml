@@ -18,14 +18,13 @@ before_install:
   #- sudo apt-get install libboost-dev libboost-test-dev libboost-program-options-dev #redundant boost devs
   - git clone https://github.com/apache/thrift.git
   #compiling thrift
-  - cd thrift
-  - ./bootstrap.sh
-  - ./configure --disable-more-warn --without-c_glib --without-hava --without-java --without-ruby --without-erlang
+  - cd thrift/lib/cpp
+  #- ./bootstrap.sh
+  #- ./configure --disable-more-warn --without-c_glib --without-hava --without-java --without-ruby --without-erlang
   #- sudo make compiler/cpp
   #- sudo make install compiler/cpp
-  - sudo make lib/cpp
-  - sudo make install lib/cpp
-  - cd ..
+  - sudo make 
+  - sudo make install
   #- thrift -version
   #end compiling thrift
   #compiling gtest
