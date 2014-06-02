@@ -14,10 +14,16 @@ before_install:
   - sudo apt-get install libboost1.55-all-dev #install all Boost libs
   - sudo apt-get install cmake # install cmake
   - sudo apt-get install libevent-dev automake libtool flex bison pkg-config g++ libssl-dev #install thrift deps
-  - sudo apt-get install libc6 libgcc1 libstdc++6 #more thrift deps
   
-  - sudo wget http://mirrors.kernel.org/ubuntu/pool/universe/t/thrift-compiler/thrift-compiler_0.8.0-0ubuntu2_i386.deb
-  - sudo dpkg -i thrift-compiler_0.8.0-0ubuntu2_i386.deb
+  #docker trial
+  - sudo sh -c "wget -qO- https://get.docker.io/gpg | apt-key add -"
+  - sudo sh -c "echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+  - sudo apt-get update
+  - echo exit 101 | sudo tee /usr/sbin/policy-rc.d
+  - sudo chmod +x /usr/sbin/policy-rc.d
+  - sudo apt-get install -qy slirp lxc lxc-docker
+  - git clone git://github.com/jpetazzo/sekexe
+  
   
   #- sudo apt-get install libboost-dev libboost-test-dev libboost-program-options-dev #redundant boost devs
   - git clone https://github.com/apache/thrift.git
