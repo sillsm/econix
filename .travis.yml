@@ -22,19 +22,9 @@ before_install:
   - echo exit 101 | sudo tee /usr/sbin/policy-rc.d
   - sudo chmod +x /usr/sbin/policy-rc.d
   - sudo apt-get install -qy slirp lxc lxc-docker
-  
-  - sudo docker -d &
-  - sleep 8s
-  #- sudo docker pull ubuntu
-  - sudo docker run ubuntu /bin/echo hello world
+  - git clone git://github.com/jpetazzo/sekexe
 
-before_script:
-  - mkdir build
-  - cd build
-  - cmake ..
-  - pwd
-
-script: "make --debug=v && pwd && ./CppTesting -v"
+script: sekexe/run "`pwd`/dockerstuff.sh"
 
 notifications:
   email:
