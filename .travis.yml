@@ -22,11 +22,10 @@ before_install:
   - echo exit 101 | sudo tee /usr/sbin/policy-rc.d
   - sudo chmod +x /usr/sbin/policy-rc.d
   - sudo apt-get install -qy slirp lxc lxc-docker
-  - git clone git://github.com/jpetazzo/sekexe
   
-  - sudo docker -d&
+  - sudo docker -d &
   - sleep 8s
-  - sudo docker pull ubuntu
+  #- sudo docker pull ubuntu
   - docker run ubuntu /bin/echo hello world
 
 before_script:
