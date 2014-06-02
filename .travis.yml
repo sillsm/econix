@@ -1,17 +1,4 @@
-before_install:
-  #- sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  #- sudo add-apt-repository ppa:boost-latest/ppa -y
-  #- apt-cache policy
-  #- sudo apt-get update -qq
-  #- if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; fi
-  #- if [ "$CXX" = "g++" ]; then export CXX="g++-4.8 -std=c++11 -Wno-unused-local-typedefs" CC="gcc-4.8 -Wno-unused-local-typedefs"; fi
-  #- sudo apt-get install -qq cmake 
-  #- sudo apt-get install libgtest-dev
-  #- sudo apt-get install libboost1.55-all-dev #install all Boost libs
-  #- sudo apt-get install cmake # install cmake
-  #- sudo apt-get install libevent-dev automake libtool flex bison pkg-config g++ libssl-dev #install thrift deps
-  
-  #docker trial
+install:
   - sudo sh -c "wget -qO- https://get.docker.io/gpg | apt-key add -"
   - sudo sh -c "echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
   - sudo apt-get update
@@ -19,11 +6,5 @@ before_install:
   - sudo chmod +x /usr/sbin/policy-rc.d
   - sudo apt-get install -qy slirp lxc lxc-docker
   - git clone git://github.com/jpetazzo/sekexe
-  
-script: sekexe/run "`pwd`/uml.sh"
-
-notifications:
-  email:
-    - max.sills@gmail.com
-  on_success: change
-  on_failure: always
+script:
+  - sekexe/run "`pwd`/uml.sh"
