@@ -26,7 +26,7 @@ before_install:
   - sudo docker -d &
   - sleep 8s
   #- sudo docker pull ubuntu
-  - docker run ubuntu /bin/echo hello world
+  - sudo docker run ubuntu /bin/echo hello world
 
 before_script:
   - mkdir build
