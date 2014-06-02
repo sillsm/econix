@@ -24,7 +24,7 @@ before_install:
   - sudo apt-get install -qy slirp lxc lxc-docker
   - git clone git://github.com/jpetazzo/sekexe
   
-  - docker -d &
+  - docker -d
   - sleep 1
   - sudo docker pull ubuntu
   - docker run ubuntu /bin/echo hello world
