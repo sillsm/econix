@@ -25,7 +25,7 @@ before_install:
   - git clone git://github.com/jpetazzo/sekexe
   
   - sudo docker -d&
-  - sleep 1
+  - sleep 8s
   - sudo docker pull ubuntu
   - docker run ubuntu /bin/echo hello world
 
