@@ -14,6 +14,7 @@ before_install:
   - sudo apt-get install libboost1.55-all-dev #install all Boost libs
   - sudo apt-get install cmake # install cmake
   - sudo apt-get install libevent-dev automake libtool flex bison pkg-config g++ libssl-dev #install thrift deps
+  - sudo apt-get install libc6 libgcc1 libstdc++6 #more thrift deps
   
   - sudo wget http://mirrors.kernel.org/ubuntu/pool/universe/t/thrift-compiler/thrift-compiler_0.8.0-0ubuntu2_i386.deb
   - sudo dpkg -i thrift-compiler_0.8.0-0ubuntu2_i386.deb
