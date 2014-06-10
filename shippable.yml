@@ -1,31 +1,30 @@
-language: python
-python:
-    - "2.7"
-    - "3.2"
-    - "3.3"
-    - "3.4"
-# command to install dependencies
-install: "pip install -r requirements.txt --use-mirrors"
-# script to run before running tests
+
+before_install:
+  - uname -a
+  - sudo apt-get -y install python-pip python-dev g++ make libfreetype6-dev libpng-dev libopenblas-dev liblapack-dev gfortran r-base libssl-dev libreadline-dev
+  - pip install --quiet --use-mirrors numpy cython
+
+install:
+  - pip install -e git+https://github.com/hackliff/intuition.git@develop#egg=intuition
+  - python setup.py install
+  - pip install --use-mirrors -r dev-requirements.txt
+
 before_script:
-    - uname -a
-    - sudo apt-get install debootstrap
-    - mkdir -p shippable/codecoverage
-    - mkdir -p shippable/testresults
-# command to run tests
+  - mkdir -p shippable/codecoverage shippable/testresults
+  - pep8 --ignore E265 --exclude _review insights tests
+
 script:
-    - nosetests --with-xunit --xunit-file=shippable/testresults/nosetests.xml
-    - coverage run --branch pocket.py
-    - coverage xml -o shippable/codecoverage/coverage.xml pocket.py
-# notification settings
+  - nosetests -w tests --with-coverage --cover-package=insights --with-xunit --xunit-file=../shippable/testresults/nosetests.xml
+  - coverage xml -o shippable/codecoverage/coverage.xml
+
+after_success:
+  - coveralls
+
 notifications:
-    email:
-        recipients:
-            - tapan.pandita@gmail.com
-        on_success: change
-        on_failure: always
-# whitelist
+  mail:
+    xavier.bruhiere@gmail.com
+
 branches:
-    only:
-        - master
-        - develop
+  only:
+    - master
+    - develop
