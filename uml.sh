@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 
 # Exit on first error
 set -e
@@ -63,4 +63,4 @@ docker -d &
 sleep 5
 
 # Use docker
-docker run ubuntu /bin/echo hi umwelt
+docker run ubuntu /bin/echo hello world
