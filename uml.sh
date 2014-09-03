@@ -1,19 +1,4 @@
-Skip to content
- This repository
-Explore
-Gist
-Blog
-Help
-Max Sills sillsm
- 
-7  Watch 
-  Star 18
- Fork 18lukecyca/travis-docker-example
- branch: master  travis-docker-example / uml.sh
-Jason Martinjhmartin on Jul 4 Apply changes to work with latest Travis / Docker. Cribs heavily from
-2 contributors Luke CycaJason Martin
-Executable File  67 lines (48 sloc)  1.324 kb RawBlameHistory   
-#!/bin/bash
+ #!/bin/bash
 
 # Exit on first error
 set -e
