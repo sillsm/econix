@@ -1,41 +1,13 @@
-language: cpp
-
-compiler: gcc
-
-before_install:
-  - uname -a
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo add-apt-repository ppa:boost-latest/ppa -y
-  - sudo apt-get update -qq
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; fi
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8 -std=c++11" CC="gcc-4.8 -std=c++11"; fi
-  - sudo apt-get install -qq cmake 
-  - sudo apt-get install libgtest-dev
-  - sudo apt-get install libboost1.55-all-dev #install all Boost libs
-  - sudo apt-get install cmake # install cmake
-  - pwd
-  - cd /usr/src/gtest
-  - sudo cmake CMakeLists.txt
-  - sudo make
-  - sudo wget http://mirrors.kernel.org/ubuntu/pool/universe/t/thrift-compiler/thrift-compiler_0.8.0-0ubuntu2_i386.deb
-  - sudo dpkg -i thrift-compiler_0.8.0-0ubuntu2_i386.deb
- 
-  # copy or symlink libgtest.a and libgtest_main.a to your /usr/lib folder
-  - sudo cp *.a /usr/lib
-  # get yourself back to the right dir
-  - cd /home/travis/build/sillsm/econix
-  - sudo apt-get install openssl libssl-dev
-
-before_script:
-  - mkdir build
-  - cd build
-  - cmake ..
-  - pwd
-
-script: "make --debug=v && pwd && ./CppTesting -v"
-
-notifications:
-  email:
-    - max.sills@gmail.com
-  on_success: change
-  on_failure: always
+install:
+  - sudo sh -c "wget -qO- https://get.docker.io/gpg | apt-key add -"
+  - sudo sh -c "echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+  - sudo apt-get update
+  - sudo mkdir -p /var/lib/docker
+  - echo exit 101 | sudo tee /usr/sbin/policy-rc.d
+  - sudo chmod +x /usr/sbin/policy-rc.d
+  - sudo apt-get install -y slirp lxc lxc-docker aufs-tools cgroup-lite
+  - curl -sLo linux https://github.com/jpetazzo/sekexe/raw/master/uml
+  - chmod +x linux
+  
+script:
+  - ./linux quiet mem=2G rootfstype=hostfs rw eth0=slirp,,/usr/bin/slirp-fullbolt init=$(pwd)/uml.sh WORKDIR=$(pwd) HOME=$HOME
