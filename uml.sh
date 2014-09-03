@@ -63,5 +63,4 @@ docker -d &
 sleep 5
 
 # Use docker
-docker run ubuntu /bin/echo hello world
-Status API Training Shop Blog About © 2014 GitHub, Inc. Terms Privacy Security Contact 
+docker run ubuntu /bin/echo hi umwelt
